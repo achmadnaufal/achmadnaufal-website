@@ -3,291 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naufal · Data pipelines for NGO & sustainability programs</title>
-    <meta name="description" content="KoboToolbox-to-dashboard pipelines, M&E monitoring systems, and analytics for nature-based solutions teams, carbon projects, and environmental NGOs.">
+    <title>Achmad Naufal</title>
+    <meta name="description" content="Notes and writing from Naufal — a data person living in Indonesia, thinking about forests, fieldwork, and the quiet parts of analytics.">
     <meta name="author" content="Achmad Naufal">
-    <meta property="og:title" content="Naufal · Data pipelines for NGO & sustainability programs">
-    <meta property="og:description" content="KoboToolbox pipelines, M&E dashboards, and analytics for environmental and NGO teams.">
+    <meta name="theme-color" content="#f4efe6">
+    <meta name="theme-color" content="#1f1d19" media="(prefers-color-scheme: dark)">
+    <meta property="og:title" content="Achmad Naufal">
+    <meta property="og:description" content="Notes from Naufal — a data person in Indonesia.">
     <meta property="og:url" content="https://achmadnaufal.com">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary">
     <link rel="canonical" href="https://achmadnaufal.com">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c15f3c'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='18' font-style='italic' fill='%23faf7f0'%3En%3C/text%3E%3C/svg%3E">
     <style>
         :root {
-            --bg: #fafaf8;
-            --text: #1a1a1a;
-            --muted: #666;
-            --accent: #3f6b4e;
-            --accent-hover: #2f5a3d;
-            --border: #e5e5e0;
-            --card-bg: #ffffff;
-            --tag-bg: #eeeee8;
+            --bg: #f4efe6;
+            --bg-elevated: #faf7f0;
+            --text: #1f1d19;
+            --text-soft: #5a5650;
+            --muted: #8a857c;
+            --rule: #e0d9cb;
+            --accent: #c15f3c;
+            --accent-soft: #a34b2c;
+            --mark: #e9dfcb;
         }
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #121212;
-                --text: #e8e8e8;
-                --muted: #9a9a9a;
-                --accent: #7fb089;
-                --accent-hover: #9bc9a5;
-                --border: #2a2a28;
-                --card-bg: #1a1a1a;
-                --tag-bg: #242422;
+                --bg: #1f1d19;
+                --bg-elevated: #26231e;
+                --text: #ece6d8;
+                --text-soft: #b8b0a0;
+                --muted: #7f786c;
+                --rule: #37332c;
+                --accent: #d8825f;
+                --accent-soft: #e89673;
+                --mark: #3a332a;
             }
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.65;
+            font-size: 18px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: "kern", "liga", "onum";
         }
-        .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
-        nav {
-            padding: 24px 0;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            background: var(--bg);
-            z-index: 10;
+        .wrap {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 28px;
         }
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        header {
+            padding: 88px 0 16px;
         }
-        nav a.brand {
-            font-weight: 600;
-            color: var(--text);
-            text-decoration: none;
-            font-size: 15px;
-            letter-spacing: -0.01em;
-        }
-        nav ul { list-style: none; display: flex; gap: 24px; }
-        nav ul a {
+        .mark {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 10px;
             color: var(--muted);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.15s;
+            font-size: 13px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
         }
-        nav ul a:hover { color: var(--accent); }
-        @media (max-width: 520px) {
-            nav ul { gap: 16px; }
-            nav ul a { font-size: 13px; }
+        .mark::before {
+            content: "";
+            width: 22px;
+            height: 1px;
+            background: var(--muted);
+            display: inline-block;
+            transform: translateY(-4px);
         }
-        section { padding: 56px 0; }
-        section:first-of-type { padding-top: 72px; }
         h1 {
-            font-size: clamp(28px, 4.6vw, 44px);
-            font-weight: 700;
-            line-height: 1.18;
-            margin-bottom: 20px;
-            letter-spacing: -0.025em;
+            font-size: clamp(38px, 6vw, 56px);
+            font-weight: 500;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin: 22px 0 10px;
+            font-style: italic;
         }
+        .sub {
+            color: var(--text-soft);
+            font-size: 19px;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+        main { padding: 48px 0 40px; }
+        section { padding: 28px 0; }
         h2 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 28px;
-            letter-spacing: 0.08em;
+            font-size: 13px;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
             color: var(--muted);
-        }
-        h3 {
-            font-size: 17px;
             font-weight: 600;
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
+            margin-bottom: 22px;
+            font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
         }
-        p { margin-bottom: 16px; color: var(--text); }
+        p {
+            margin-bottom: 18px;
+            color: var(--text);
+        }
         p:last-child { margin-bottom: 0; }
-        .lede {
-            font-size: 17.5px;
-            color: var(--muted);
-            margin-bottom: 32px;
-            max-width: 620px;
-            line-height: 1.55;
-        }
-        a.cta {
-            display: inline-block;
-            background: var(--accent);
-            color: #fff;
-            padding: 11px 22px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-            transition: background 0.15s;
-        }
-        a.cta:hover { background: var(--accent-hover); }
-        a.link {
+        .prose p { hyphens: auto; }
+        .prose em { color: var(--text-soft); }
+        a {
             color: var(--accent);
             text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.15s;
+            border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+            transition: border-color 0.2s, color 0.2s;
         }
-        a.link:hover { border-bottom-color: var(--accent); }
-        .services { display: grid; gap: 16px; }
-        .service {
-            padding: 22px 24px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--card-bg);
+        a:hover {
+            color: var(--accent-soft);
+            border-bottom-color: var(--accent);
         }
-        .service p {
-            font-size: 15px;
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+        .rule {
+            border: 0;
+            border-top: 1px solid var(--rule);
+            margin: 0;
+        }
+        .dot-rule {
+            text-align: center;
             color: var(--muted);
-            margin-bottom: 12px;
-            line-height: 1.55;
+            letter-spacing: 0.6em;
+            font-size: 14px;
+            padding: 16px 0;
+            user-select: none;
         }
-        .engagement {
-            font-size: 12.5px;
+        .notes {
+            list-style: none;
+            display: grid;
+            gap: 4px;
+        }
+        .notes li {
+            display: grid;
+            grid-template-columns: 96px 1fr;
+            gap: 20px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--rule);
+            align-items: baseline;
+        }
+        .notes li:last-child { border-bottom: none; }
+        .notes time {
             color: var(--muted);
-            font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+            font-size: 13px;
+            font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
             letter-spacing: 0.02em;
         }
-        .work-item {
-            padding: 22px 0;
-            border-bottom: 1px solid var(--border);
+        .notes .title {
+            font-size: 17px;
+            color: var(--text);
         }
-        .work-item:last-child { border-bottom: none; }
-        .work-item p {
-            font-size: 15px;
+        .notes .empty {
             color: var(--muted);
-            margin-bottom: 12px;
-            line-height: 1.55;
+            font-style: italic;
         }
-        .tags { margin-bottom: 12px; }
-        .tag {
-            display: inline-block;
-            font-size: 12px;
-            background: var(--tag-bg);
-            color: var(--muted);
-            padding: 2px 9px;
-            border-radius: 4px;
-            margin-right: 4px;
-            margin-bottom: 4px;
-            font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        @media (max-width: 520px) {
+            .notes li { grid-template-columns: 78px 1fr; gap: 14px; }
         }
-        .about p { line-height: 1.7; }
-        .about strong { color: var(--text); font-weight: 600; }
-        .contact-links {
-            display: flex;
-            flex-wrap: wrap;
+        .now p { color: var(--text-soft); }
+        .now p::first-letter {
+            font-size: 1.2em;
+            color: var(--text);
+        }
+        .elsewhere {
+            display: grid;
+            grid-template-columns: 96px 1fr;
             gap: 20px;
-            margin-top: 20px;
+            row-gap: 10px;
+            font-size: 16px;
         }
-        .contact-links a { font-size: 15px; }
-        footer {
-            padding: 40px 0 32px;
-            border-top: 1px solid var(--border);
-            margin-top: 32px;
-            font-size: 13px;
+        .elsewhere dt {
             color: var(--muted);
+            font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+            font-size: 13px;
+            letter-spacing: 0.04em;
+            padding-top: 3px;
         }
-        footer a { color: var(--muted); text-decoration: none; }
+        .elsewhere dd { color: var(--text-soft); }
+        @media (max-width: 520px) {
+            .elsewhere { grid-template-columns: 78px 1fr; gap: 14px; }
+        }
+        footer {
+            padding: 48px 0 64px;
+            color: var(--muted);
+            font-size: 13px;
+            font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+            letter-spacing: 0.02em;
+        }
+        footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+        footer a {
+            color: var(--muted);
+            border-bottom-color: transparent;
+        }
         footer a:hover { color: var(--accent); }
+        ::selection { background: var(--mark); color: var(--text); }
     </style>
 </head>
 <body>
 
-<nav>
-    <div class="container">
-        <a href="/" class="brand">Naufal</a>
-        <ul>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+<header>
+    <div class="wrap">
+        <span class="mark">Bandung · Indonesia</span>
+        <h1>Achmad Naufal</h1>
+        <p class="sub">data, forests, and a small corner of the internet.</p>
     </div>
-</nav>
+</header>
 
-<section id="hero">
-    <div class="container">
-        <h1>Data pipelines and monitoring dashboards for NGO and sustainability programs.</h1>
-        <p class="lede">I help nature-based-solutions teams, carbon project developers, and environmental NGOs turn KoboToolbox field data into trustworthy dashboards and donor-ready reports.</p>
-        <a href="#contact" class="cta">Start a project →</a>
-    </div>
-</section>
+<main>
+    <div class="wrap">
 
-<section id="services">
-    <div class="container">
-        <h2>Services</h2>
-        <div class="services">
-            <div class="service">
-                <h3>KoboToolbox → Dashboard pipeline</h3>
-                <p>End-to-end pipeline from your KoboToolbox forms to a live monitoring dashboard. Data quality validation, geospatial mapping, enumerator performance, Excel and Power BI export. Hosted or self-hosted.</p>
-                <span class="engagement">Fixed-price · 2–4 weeks</span>
-            </div>
-            <div class="service">
-                <h3>Field data quality audit</h3>
-                <p>Deep quality review of your existing M&amp;E data. Validation rule set tuned to your forms, issue inventory, and a remediation plan your team can run in-house after handover.</p>
-                <span class="engagement">Fixed-price · 1–2 weeks</span>
-            </div>
-            <div class="service">
-                <h3>M&amp;E analytics and reporting</h3>
-                <p>Indicator tracking, donor reports, ad-hoc analysis. For programs with data and no dedicated analyst. Power BI, Streamlit, or whatever stack you already run.</p>
-                <span class="engagement">Hourly or monthly retainer</span>
-            </div>
-        </div>
-    </div>
-</section>
+        <section class="prose">
+            <p>Hello. I'm Naufal. This is a quiet page where I keep a short profile and, eventually, some notes.</p>
+            <p>I grew up in Indonesia and studied statistics in Surabaya. The first half of my working life was spent around pharma commercial analytics &mdash; regional sales dashboards, supply chains, the usual spreadsheet weather. More recently I've drifted toward forests and fieldwork, helping small teams make sense of the messy data that comes back from plots and villages across Indonesia, Thailand, and a few places in between.</p>
+            <p>I like things that are slow and legible: longhand notes, walks, a good map, code that reads like prose. Most of what I put online lives somewhere between a notebook and a letter &mdash; short, personal, not especially polished.</p>
+        </section>
 
-<section id="work">
-    <div class="container">
-        <h2>Selected work</h2>
-        <div class="work-item">
-            <h3>kobo-me-dashboard</h3>
-            <p>Open-source KoboToolbox-to-dashboard pipeline for NGO M&amp;E teams. Validation rules, geospatial monitoring, quality scoring, one-click dashboard. In active development.</p>
-            <div class="tags">
-                <span class="tag">Python</span>
-                <span class="tag">Streamlit</span>
-                <span class="tag">KoboToolbox</span>
-                <span class="tag">Geospatial</span>
-            </div>
-            <a href="https://github.com/achmadnaufal/kobo-me-dashboard" class="link">GitHub →</a>
-        </div>
-        <div class="work-item">
-            <h3>nbs-monitoring-dashboard</h3>
-            <p>Streamlit and DuckDB dashboard prototype for nature-based solutions monitoring. Data loading, quality indicators, and plot-level summaries.</p>
-            <div class="tags">
-                <span class="tag">Streamlit</span>
-                <span class="tag">DuckDB</span>
-                <span class="tag">SQL</span>
-            </div>
-            <a href="https://github.com/achmadnaufal/nbs-monitoring-dashboard" class="link">GitHub →</a>
-        </div>
-    </div>
-</section>
+        <hr class="rule">
 
-<section id="about" class="about">
-    <div class="container">
-        <h2>About</h2>
-        <p>I'm Naufal, a data analyst based in Indonesia. For the past several years I've built analytics and monitoring systems for pharma and environmental programs across Asia.</p>
-        <p>The first half of my career was in pharma commercial analytics, building regional sales and supply-chain dashboards. More recently I've focused on nature-based solutions, working with field teams in Indonesia, Thailand, and beyond to turn messy KoboToolbox data into decision-grade monitoring.</p>
-        <p><strong>Stack:</strong> Power BI (advanced DAX), Python (pandas, Streamlit, geopandas), SQL, QGIS, KoboToolbox, SharePoint, Power Automate.</p>
-        <p><strong>Education:</strong> Master's in Technology Management (Business Analytics) and Bachelor's in Statistics, Institut Teknologi Sepuluh Nopember (ITS).</p>
-    </div>
-</section>
+        <section class="now">
+            <h2>Currently</h2>
+            <p>Reading about peatlands and how they refuse to be counted. Learning a little more QGIS every week. Trying to write more and ship less. Drinking too much kopi tubruk.</p>
+        </section>
 
-<section id="contact">
-    <div class="container">
-        <h2>Start a project</h2>
-        <p>Tell me about your forms, your data, and what you want on the dashboard. I'll reply with a fit check and a scoped proposal within two working days.</p>
-        <div class="contact-links">
-            <a href="mailto:achmadnaufal440@gmail.com" class="link">achmadnaufal440@gmail.com</a>
-            <a href="https://www.linkedin.com/in/achnfl/" class="link">LinkedIn</a>
-            <a href="https://github.com/achmadnaufal" class="link">GitHub</a>
-        </div>
+        <div class="dot-rule">· · ·</div>
+
+        <section>
+            <h2>Notes</h2>
+            <ul class="notes">
+                <li>
+                    <time datetime="2026">soon</time>
+                    <span class="title empty">The first note is still on paper.</span>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="rule">
+
+        <section>
+            <h2>Elsewhere</h2>
+            <dl class="elsewhere">
+                <dt>email</dt>
+                <dd><a href="mailto:achmadnaufal440@gmail.com">achmadnaufal440@gmail.com</a></dd>
+                <dt>github</dt>
+                <dd><a href="https://github.com/achmadnaufal">achmadnaufal</a></dd>
+                <dt>linkedin</dt>
+                <dd><a href="https://www.linkedin.com/in/achnfl/">achnfl</a></dd>
+            </dl>
+        </section>
+
     </div>
-</section>
+</main>
 
 <footer>
-    <div class="container">
-        <p>© 2026 Achmad Naufal · <a href="mailto:achmadnaufal440@gmail.com">Get in touch</a></p>
+    <div class="wrap">
+        <span>© 2026 Achmad Naufal</span>
+        <span>made slowly, hosted quietly.</span>
     </div>
 </footer>
 
