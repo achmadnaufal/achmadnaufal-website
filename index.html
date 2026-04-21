@@ -2,272 +2,326 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Achmad Naufal</title>
-    <meta name="description" content="Notes and writing from Naufal — a data person living in Indonesia, thinking about forests, fieldwork, and the quiet parts of analytics.">
+    <meta name="description" content="Achmad Naufal.">
     <meta name="author" content="Achmad Naufal">
-    <meta name="theme-color" content="#f4efe6">
-    <meta name="theme-color" content="#1f1d19" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://achmadnaufal.com">
     <meta property="og:title" content="Achmad Naufal">
-    <meta property="og:description" content="Notes from Naufal — a data person in Indonesia.">
     <meta property="og:url" content="https://achmadnaufal.com">
     <meta property="og:type" content="website">
-    <link rel="canonical" href="https://achmadnaufal.com">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c15f3c'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='18' font-style='italic' fill='%23faf7f0'%3En%3C/text%3E%3C/svg%3E">
+    <meta name="twitter:card" content="summary">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         :root {
-            --bg: #f4efe6;
-            --bg-elevated: #faf7f0;
-            --text: #1f1d19;
-            --text-soft: #5a5650;
-            --muted: #8a857c;
-            --rule: #e0d9cb;
-            --accent: #c15f3c;
-            --accent-soft: #a34b2c;
-            --mark: #e9dfcb;
+            --bg: #050505;
+            --fg: #eeeae0;
+            --accent: #78ff8c;
+            --muted: #6a6a66;
         }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #1f1d19;
-                --bg-elevated: #26231e;
-                --text: #ece6d8;
-                --text-soft: #b8b0a0;
-                --muted: #7f786c;
-                --rule: #37332c;
-                --accent: #d8825f;
-                --accent-soft: #e89673;
-                --mark: #3a332a;
-            }
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+
+        html, body { height: 100%; }
+
         body {
-            font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
             background: var(--bg);
-            color: var(--text);
-            line-height: 1.65;
-            font-size: 18px;
+            color: var(--fg);
+            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 13px;
+            overflow: hidden;
+            position: relative;
+            min-height: 100svh;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            font-feature-settings: "kern", "liga", "onum";
         }
-        .wrap {
-            max-width: 640px;
-            margin: 0 auto;
-            padding: 0 28px;
+
+        #field {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 0;
         }
-        header {
-            padding: 88px 0 16px;
+
+        .ui {
+            position: fixed;
+            inset: 0;
+            z-index: 2;
+            padding: clamp(1.25rem, 3.5vw, 2.25rem);
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            pointer-events: none;
         }
-        .mark {
+
+        .ui > * { pointer-events: auto; }
+
+        .bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .bar .mark {
             display: inline-flex;
-            align-items: baseline;
-            gap: 10px;
-            color: var(--muted);
-            font-size: 13px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+            align-items: center;
+            gap: 0.55rem;
         }
-        .mark::before {
-            content: "";
-            width: 22px;
-            height: 1px;
-            background: var(--muted);
-            display: inline-block;
-            transform: translateY(-4px);
+
+        .bar .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+            animation: pulse 2.6s ease-in-out infinite;
         }
-        h1 {
-            font-size: clamp(38px, 6vw, 56px);
-            font-weight: 500;
-            line-height: 1.05;
-            letter-spacing: -0.02em;
-            margin: 22px 0 10px;
-            font-style: italic;
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.25); }
         }
-        .sub {
-            color: var(--text-soft);
-            font-size: 19px;
-            font-style: italic;
-            margin-bottom: 4px;
-        }
-        main { padding: 48px 0 40px; }
-        section { padding: 28px 0; }
-        h2 {
-            font-size: 13px;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--muted);
-            font-weight: 600;
-            margin-bottom: 22px;
-            font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-        }
-        p {
-            margin-bottom: 18px;
-            color: var(--text);
-        }
-        p:last-child { margin-bottom: 0; }
-        .prose p { hyphens: auto; }
-        .prose em { color: var(--text-soft); }
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
-            transition: border-color 0.2s, color 0.2s;
-        }
-        a:hover {
-            color: var(--accent-soft);
-            border-bottom-color: var(--accent);
-        }
-        a:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 3px;
-            border-radius: 2px;
-        }
-        .rule {
-            border: 0;
-            border-top: 1px solid var(--rule);
-            margin: 0;
-        }
-        .dot-rule {
+
+        .center {
+            align-self: center;
+            justify-self: center;
             text-align: center;
             color: var(--muted);
-            letter-spacing: 0.6em;
-            font-size: 14px;
-            padding: 16px 0;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
             user-select: none;
+            mix-blend-mode: difference;
+            opacity: 0.9;
         }
-        .notes {
+
+        .center b {
+            display: block;
+            font-weight: 500;
+            color: var(--fg);
+            letter-spacing: 0.42em;
+            font-size: 0.88rem;
+            margin-top: 0.35rem;
+        }
+
+        .center small {
+            display: block;
+            margin-top: 0.9rem;
+            font-size: 0.62rem;
+            letter-spacing: 0.26em;
+            opacity: 0.6;
+        }
+
+        footer.bar { align-items: end; }
+
+        .links {
+            display: flex;
+            gap: 1.75rem;
             list-style: none;
-            display: grid;
-            gap: 4px;
+            font-size: 0.78rem;
+            letter-spacing: 0.22em;
         }
-        .notes li {
-            display: grid;
-            grid-template-columns: 96px 1fr;
-            gap: 20px;
-            padding: 14px 0;
-            border-bottom: 1px solid var(--rule);
-            align-items: baseline;
+
+        .links a {
+            color: var(--fg);
+            text-decoration: none;
+            position: relative;
+            transition: color 180ms ease;
         }
-        .notes li:last-child { border-bottom: none; }
-        .notes time {
-            color: var(--muted);
-            font-size: 13px;
-            font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-            letter-spacing: 0.02em;
+
+        .links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -5px;
+            height: 1px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 260ms ease;
         }
-        .notes .title {
-            font-size: 17px;
-            color: var(--text);
+
+        .links a:hover,
+        .links a:focus-visible {
+            color: var(--accent);
+            outline: none;
         }
-        .notes .empty {
-            color: var(--muted);
-            font-style: italic;
+
+        .links a:hover::after,
+        .links a:focus-visible::after {
+            transform: scaleX(1);
         }
-        @media (max-width: 520px) {
-            .notes li { grid-template-columns: 78px 1fr; gap: 14px; }
+
+        .sig { letter-spacing: 0.24em; }
+
+        @media (max-width: 560px) {
+            .bar { font-size: 0.62rem; letter-spacing: 0.16em; }
+            .center b { letter-spacing: 0.32em; font-size: 0.78rem; }
+            .links { gap: 1.1rem; font-size: 0.68rem; letter-spacing: 0.18em; }
         }
-        .now p { color: var(--text-soft); }
-        .now p::first-letter {
-            font-size: 1.2em;
-            color: var(--text);
-        }
-        .elsewhere {
-            display: grid;
-            grid-template-columns: 96px 1fr;
-            gap: 20px;
-            row-gap: 10px;
-            font-size: 16px;
-        }
-        .elsewhere dt {
-            color: var(--muted);
-            font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-            font-size: 13px;
-            letter-spacing: 0.04em;
-            padding-top: 3px;
-        }
-        .elsewhere dd { color: var(--text-soft); }
-        @media (max-width: 520px) {
-            .elsewhere { grid-template-columns: 78px 1fr; gap: 14px; }
-        }
-        footer {
-            padding: 48px 0 64px;
-            color: var(--muted);
-            font-size: 13px;
-            font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
-            letter-spacing: 0.02em;
-        }
-        footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-        footer a {
-            color: var(--muted);
-            border-bottom-color: transparent;
-        }
-        footer a:hover { color: var(--accent); }
-        ::selection { background: var(--mark); color: var(--text); }
     </style>
 </head>
 <body>
+    <canvas id="field" aria-hidden="true"></canvas>
 
-<header>
-    <div class="wrap">
-        <span class="mark">Bandung · Indonesia</span>
-        <h1>Achmad Naufal</h1>
-        <p class="sub">data, forests, and a small corner of the internet.</p>
-    </div>
-</header>
+    <div class="ui">
+        <header class="bar">
+            <span class="mark"><span class="dot" aria-hidden="true"></span>achmadnaufal.com</span>
+            <span>MMXXVI</span>
+        </header>
 
-<main>
-    <div class="wrap">
+        <div class="center">
+            <span>/ move the cursor /</span>
+            <b>&mdash;&nbsp;Achmad&nbsp;Naufal&nbsp;&mdash;</b>
+            <small>a signature, nothing more</small>
+        </div>
 
-        <section class="prose">
-            <p>Hello. I'm Naufal. This is a quiet page where I keep a short profile and, eventually, some notes.</p>
-            <p>I grew up in Indonesia and studied statistics in Surabaya. The first half of my working life was spent around pharma commercial analytics &mdash; regional sales dashboards, supply chains, the usual spreadsheet weather. More recently I've drifted toward forests and fieldwork, helping small teams make sense of the messy data that comes back from plots and villages across Indonesia, Thailand, and a few places in between.</p>
-            <p>I like things that are slow and legible: longhand notes, walks, a good map, code that reads like prose. Most of what I put online lives somewhere between a notebook and a letter &mdash; short, personal, not especially polished.</p>
-        </section>
-
-        <hr class="rule">
-
-        <section class="now">
-            <h2>Currently</h2>
-            <p>Reading about peatlands and how they refuse to be counted. Learning a little more QGIS every week. Trying to write more and ship less. Drinking too much kopi tubruk.</p>
-        </section>
-
-        <div class="dot-rule">· · ·</div>
-
-        <section>
-            <h2>Notes</h2>
-            <ul class="notes">
-                <li>
-                    <time datetime="2026">soon</time>
-                    <span class="title empty">The first note is still on paper.</span>
-                </li>
+        <footer class="bar">
+            <span class="sig">00 · field</span>
+            <ul class="links" aria-label="Contact">
+                <li><a href="mailto:achmadnaufal440@gmail.com">email</a></li>
+                <li><a href="https://github.com/achmadnaufal" target="_blank" rel="noopener noreferrer">github</a></li>
             </ul>
-        </section>
-
-        <hr class="rule">
-
-        <section>
-            <h2>Elsewhere</h2>
-            <dl class="elsewhere">
-                <dt>email</dt>
-                <dd><a href="mailto:achmadnaufal440@gmail.com">achmadnaufal440@gmail.com</a></dd>
-                <dt>github</dt>
-                <dd><a href="https://github.com/achmadnaufal">achmadnaufal</a></dd>
-                <dt>linkedin</dt>
-                <dd><a href="https://www.linkedin.com/in/achnfl/">achnfl</a></dd>
-            </dl>
-        </section>
-
+        </footer>
     </div>
-</main>
 
-<footer>
-    <div class="wrap">
-        <span>© 2026 Achmad Naufal</span>
-        <span>made slowly, hosted quietly.</span>
-    </div>
-</footer>
+    <script>
+    (() => {
+        const canvas = document.getElementById('field');
+        const ctx = canvas.getContext('2d');
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+        let W = 0, H = 0, DPR = 1;
+        let dots = [];
+        let mx = -1e4, my = -1e4, pressed = 0;
+
+        const SPACING = 26;
+        const RADIUS = 170;
+        const MAX_PUSH = 22;
+
+        const palette = {
+            base: [70, 70, 68],
+            hot: [120, 255, 140],
+        };
+
+        function resize() {
+            DPR = Math.min(window.devicePixelRatio || 1, 2);
+            W = innerWidth;
+            H = innerHeight;
+            canvas.width = W * DPR;
+            canvas.height = H * DPR;
+            canvas.style.width = W + 'px';
+            canvas.style.height = H + 'px';
+            ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+            buildDots();
+        }
+
+        function buildDots() {
+            dots = [];
+            const offsetX = (W % SPACING) / 2;
+            const offsetY = (H % SPACING) / 2;
+            for (let y = offsetY; y < H + SPACING; y += SPACING) {
+                for (let x = offsetX; x < W + SPACING; x += SPACING) {
+                    dots.push({
+                        ox: x, oy: y,
+                        x: x, y: y,
+                        vx: 0, vy: 0,
+                    });
+                }
+            }
+        }
+
+        function onMove(e) {
+            const t = e.touches ? e.touches[0] : e;
+            mx = t.clientX;
+            my = t.clientY;
+        }
+        function onLeave() { mx = -1e4; my = -1e4; }
+
+        addEventListener('pointermove', onMove, { passive: true });
+        addEventListener('pointerleave', onLeave);
+        addEventListener('touchmove', onMove, { passive: true });
+        addEventListener('touchend', onLeave);
+        addEventListener('pointerdown', () => { pressed = 1; });
+        addEventListener('pointerup', () => { pressed = 0; });
+
+        function mix(a, b, t) {
+            return [
+                a[0] + (b[0] - a[0]) * t,
+                a[1] + (b[1] - a[1]) * t,
+                a[2] + (b[2] - a[2]) * t,
+            ];
+        }
+
+        function frame() {
+            ctx.clearRect(0, 0, W, H);
+
+            const r2 = RADIUS * RADIUS;
+            const push = MAX_PUSH * (1 + pressed * 1.5);
+
+            for (let i = 0; i < dots.length; i++) {
+                const d = dots[i];
+                const dx = d.x - mx;
+                const dy = d.y - my;
+                const dist2 = dx * dx + dy * dy;
+
+                if (dist2 < r2 && dist2 > 0.001) {
+                    const dist = Math.sqrt(dist2);
+                    const f = (1 - dist / RADIUS);
+                    const strength = f * f * push;
+                    d.vx += (dx / dist) * strength * 0.06;
+                    d.vy += (dy / dist) * strength * 0.06;
+                }
+
+                d.vx += (d.ox - d.x) * 0.045;
+                d.vy += (d.oy - d.y) * 0.045;
+                d.vx *= 0.82;
+                d.vy *= 0.82;
+                d.x += d.vx;
+                d.y += d.vy;
+
+                const disp = Math.hypot(d.x - d.ox, d.y - d.oy);
+                const t = Math.min(1, disp / 40);
+                const c = mix(palette.base, palette.hot, t);
+                const alpha = 0.35 + t * 0.6;
+                const size = 0.9 + t * 2.4;
+
+                ctx.fillStyle = `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${alpha})`;
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            requestAnimationFrame(frame);
+        }
+
+        function staticRender() {
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = `rgba(${palette.base[0]},${palette.base[1]},${palette.base[2]},0.55)`;
+            for (const d of dots) {
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, 1, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        resize();
+        addEventListener('resize', resize);
+
+        if (reduce) {
+            staticRender();
+        } else {
+            frame();
+        }
+    })();
+    </script>
 </body>
 </html>
