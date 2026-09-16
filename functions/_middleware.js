@@ -129,5 +129,12 @@ export const onRequest = async (context) => {
       },
     });
   }
+  if (url.pathname.startsWith("/.archive/")) {
+    return new Response("Not Found", {
+      status: 404,
+      headers: { "content-type": "text/plain; charset=utf-8" },
+    });
+  }
+
   return context.next();
 };
