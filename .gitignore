@@ -4,3 +4,4 @@
 *.log
 node_modules/
 DEPLOY_PROMPT.md
+.wrangler/
